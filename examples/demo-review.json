@@ -1,0 +1,28 @@
+{
+  "demo": "SIMULATED integrations; real LangGraph and SQLite checkpoint/resume",
+  "before_restart": "awaiting_approval",
+  "after_restart": "rejected",
+  "summary": "Review complete: 1 findings across 1 Python files. 0 findings outside added lines.",
+  "findings": [
+    {
+      "file": "app.py",
+      "line": 2,
+      "severity": "MEDIUM",
+      "source": "logic",
+      "rule_id": "LOGIC",
+      "explanation": "The index equals the list length and is out of range.",
+      "evidence": "    return items[len(items)]",
+      "fix": "Use items[-1] and handle empty input.",
+      "context_refs": [],
+      "in_changed_lines": true
+    }
+  ],
+  "coverage": {
+    "reviewed_files": 1,
+    "skipped": [],
+    "partial": false,
+    "logic_enabled": true,
+    "retrieval_notes": [],
+    "retrieval_candidates_scanned": 0
+  }
+}

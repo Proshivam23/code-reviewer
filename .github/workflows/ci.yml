@@ -1,0 +1,29 @@
+name: checks
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.12.6"
+          enable-cache: true
+      - run: uv sync --locked --dev
+      - run: uv run ruff check src tests
+      - run: uv run pytest -q
+      - run: uv build
+      - name: Verify wheel in an isolated environment
+        run: |
+          uv venv /tmp/reviewer-install
+          uv pip install --python /tmp/reviewer-install/bin/python dist/*.whl
+          cd /tmp
+          /tmp/reviewer-install/bin/python -c "import main, workflow, agents, retrieval, evaluation"
+      - run: docker build -t code-review-tools:latest .
+      - run: uv run review-evaluate --output evaluation-results/baseline.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: static-analysis-evaluation
+          path: evaluation-results/baseline.json

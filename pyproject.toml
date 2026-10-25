@@ -1,0 +1,54 @@
+[project]
+name = "code-reviwer"
+version = "0.1.0"
+description = "Checkpointed LangGraph pull-request reviewer with isolated analyzers"
+readme = "README.md"
+authors = [
+    { name = "Proshivam23", email = "shivamraikar2003@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "bandit>=1.9.4",
+    "langgraph>=1.2.14,<2",
+    "langgraph-checkpoint-sqlite>=3,<4",
+    "langchain-core>=1.0,<2",
+    "langsmith>=0.4,<1",
+    "requests>=2.32,<3",
+    "fastapi>=0.143.0",
+    "httpx>=0.28.1",
+    "langchain-google-genai>=4.0,<5",
+    "pydantic>=2.14.0",
+    "pydantic-settings>=2.10.1",
+    "ruff>=0.16.10",
+    "uvicorn>=0.54.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0.0",
+]
+
+[project.scripts]
+code-reviewer = "main:main"
+review-evaluate = "evaluation:main"
+review-demo = "demo:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+py-modules = ["main", "agents", "github_client", "schemas", "tools", "paths", "workflow", "retrieval", "evaluation", "demo"]
+packages = ["core"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I"]

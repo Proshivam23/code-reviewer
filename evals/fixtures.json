@@ -1,0 +1,254 @@
+[
+  {
+    "id": "eval-input",
+    "category": "security",
+    "code": "def calculate(expression):\n    return eval(expression)\n",
+    "expected": [
+      {
+        "source": "bandit",
+        "rule_id": "B307",
+        "line": 2
+      }
+    ]
+  },
+  {
+    "id": "assert-auth",
+    "category": "security",
+    "code": "def authorize(user):\n    assert user.is_admin\n    return True\n",
+    "expected": [
+      {
+        "source": "bandit",
+        "rule_id": "B101",
+        "line": 2
+      }
+    ]
+  },
+  {
+    "id": "weak-hash",
+    "category": "security",
+    "code": "import hashlib\n\n\ndef digest(data):\n    return hashlib.md5(data).hexdigest()\n",
+    "expected": [
+      {
+        "source": "bandit",
+        "rule_id": "B324",
+        "line": 5
+      }
+    ]
+  },
+  {
+    "id": "hardcoded-password",
+    "category": "security",
+    "code": "password = 'sample-password-for-fixture'\n",
+    "expected": [
+      {
+        "source": "bandit",
+        "rule_id": "B105",
+        "line": 1
+      }
+    ]
+  },
+  {
+    "id": "unsafe-yaml",
+    "category": "security",
+    "code": "import yaml\n\n\ndef parse(text):\n    return yaml.load(text, Loader=yaml.Loader)\n",
+    "expected": [
+      {
+        "source": "bandit",
+        "rule_id": "B506",
+        "line": 5
+      }
+    ]
+  },
+  {
+    "id": "unsafe-tempfile",
+    "category": "security",
+    "code": "import tempfile\n\n\ndef temporary_path():\n    return tempfile.mktemp()\n",
+    "expected": [
+      {
+        "source": "bandit",
+        "rule_id": "B306",
+        "line": 5
+      }
+    ]
+  },
+  {
+    "id": "unused-import",
+    "category": "style",
+    "code": "import os\n",
+    "expected": [
+      {
+        "source": "ruff",
+        "rule_id": "F401",
+        "line": 1
+      }
+    ]
+  },
+  {
+    "id": "undefined-name",
+    "category": "style",
+    "code": "def greet():\n    return missing_name\n",
+    "expected": [
+      {
+        "source": "ruff",
+        "rule_id": "F821",
+        "line": 2
+      }
+    ]
+  },
+  {
+    "id": "unused-local",
+    "category": "style",
+    "code": "def greet():\n    unused = 1\n    return 'hello'\n",
+    "expected": [
+      {
+        "source": "ruff",
+        "rule_id": "F841",
+        "line": 2
+      }
+    ]
+  },
+  {
+    "id": "one-line-if",
+    "category": "style",
+    "code": "def value(flag):\n    if flag: return 1\n    return 0\n",
+    "expected": [
+      {
+        "source": "ruff",
+        "rule_id": "E701",
+        "line": 2
+      }
+    ]
+  },
+  {
+    "id": "semicolon",
+    "category": "style",
+    "code": "left = 1; right = 2\n",
+    "expected": [
+      {
+        "source": "ruff",
+        "rule_id": "E702",
+        "line": 1
+      }
+    ]
+  },
+  {
+    "id": "none-equality",
+    "category": "style",
+    "code": "def absent(value):\n    return value == None\n",
+    "expected": [
+      {
+        "source": "ruff",
+        "rule_id": "E711",
+        "line": 2
+      }
+    ]
+  },
+  {
+    "id": "empty-average",
+    "category": "logic",
+    "code": "def average(values):\n    \"\"\"Return the mean, or zero for an empty collection.\"\"\"\n    return sum(values) / len(values)\n",
+    "expected": [
+      {
+        "source": "logic",
+        "rule_id": "LOGIC",
+        "line": 3
+      }
+    ]
+  },
+  {
+    "id": "off-by-one",
+    "category": "logic",
+    "code": "def last_item(items):\n    \"\"\"Return the last item from a non-empty list.\"\"\"\n    return items[len(items)]\n",
+    "expected": [
+      {
+        "source": "logic",
+        "rule_id": "LOGIC",
+        "line": 3
+      }
+    ]
+  },
+  {
+    "id": "mutable-default",
+    "category": "logic",
+    "code": "def append_item(value, items=[]):\n    \"\"\"Without items, create an independent list on each call.\"\"\"\n    items.append(value)\n    return items\n",
+    "expected": [
+      {
+        "source": "logic",
+        "rule_id": "LOGIC",
+        "line": 1
+      }
+    ]
+  },
+  {
+    "id": "wrong-age-boundary",
+    "category": "logic",
+    "code": "def is_adult(age):\n    \"\"\"An adult is anyone aged 18 or older.\"\"\"\n    return age > 18\n",
+    "expected": [
+      {
+        "source": "logic",
+        "rule_id": "LOGIC",
+        "line": 3
+      }
+    ]
+  },
+  {
+    "id": "empty-maximum",
+    "category": "logic",
+    "code": "def largest(values):\n    \"\"\"Return the largest value, or None for an empty collection.\"\"\"\n    return max(values)\n",
+    "expected": [
+      {
+        "source": "logic",
+        "rule_id": "LOGIC",
+        "line": 3
+      }
+    ]
+  },
+  {
+    "id": "wrong-conversion",
+    "category": "logic",
+    "code": "def to_celsius(fahrenheit):\n    \"\"\"Convert a Fahrenheit temperature to Celsius.\"\"\"\n    return (fahrenheit + 32) * 5 / 9\n",
+    "expected": [
+      {
+        "source": "logic",
+        "rule_id": "LOGIC",
+        "line": 3
+      }
+    ]
+  },
+  {
+    "id": "clean-average",
+    "category": "clean",
+    "code": "def average(values):\n    return sum(values) / len(values) if values else 0\n",
+    "expected": []
+  },
+  {
+    "id": "clean-last",
+    "category": "clean",
+    "code": "def last_item(items):\n    return items[-1] if items else None\n",
+    "expected": []
+  },
+  {
+    "id": "clean-list",
+    "category": "clean",
+    "code": "def append_item(value, items=None):\n    if items is None:\n        items = []\n    items.append(value)\n    return items\n",
+    "expected": []
+  },
+  {
+    "id": "clean-boundary",
+    "category": "clean",
+    "code": "def is_adult(age):\n    return age >= 18\n",
+    "expected": []
+  },
+  {
+    "id": "clean-conversion",
+    "category": "clean",
+    "code": "def to_celsius(fahrenheit):\n    return (fahrenheit - 32) * 5 / 9\n",
+    "expected": []
+  },
+  {
+    "id": "clean-json",
+    "category": "clean",
+    "code": "import json\n\n\ndef parse(text):\n    return json.loads(text)\n",
+    "expected": []
+  }
+]
